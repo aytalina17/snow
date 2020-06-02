@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title></title>
+	<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+	<style type="text/css">
+		.mark{
+			height: 100px;
+			width: 100px;
+			position: absolute;
+		}
+		.bg{
+			background-image: url(bg1.png);
+			background-size: 100% 100%;
+			height: 720px;
+		}
+		.text{
+			height: 150px;
+            background: #f5ebb8;
+            opacity: 0.8;
+		}
+	</style>
+</head>
+<body class="bg col-12 p-0">
+	<div class="text col-5">
+		<h1>Количество жуков: <span class="count">0</span></h1>
+        <h1>Количество убитых жуков: <span class="died">0</span></h1>
+	</div>
+    <script type="text/javascript">
+    	let count = document.querySelector('.count');
+    	let died = document.querySelector('.died');
+    	let num1 = 0;
+    	let num2 = 0;
+    	let randomLeft = function(){ 
+            let rand = Math.random() * 1400;
+            let roundLeft = Math.round(rand);
+            return roundLeft;
+        }
+        let randomTop = function(){ 
+            let rand = Math.random() * 300;
+            let roundTop = Math.round(rand);
+            return roundTop;
+        }
+    	let createPoint = function(){
+    		let point = document.createElement('img');
+		    document.body.appendChild(point);
+		    point.src = "1.png" 
+		    point.classList.add("mark");
+		    point.style.marginLeft = randomLeft() + 'px';
+		    point.style.marginTop = randomTop() + 'px';
+
+		    point.onclick = function(){ //делаем нажатие
+		        point.style.display = "none";
+		        num2 = num2 + 1;
+		        died.innerHTML = num2;
+		    }
+		    num1 = num1 + 1;
+		    count.innerHTML = num1;
+		    
+    	}
+    	let endGame = function(){
+    		if (num2 >= 5) {
+    		    alert('You win');
+    		    bg.style.display = "none";
+    		}
+    		if (num2 < 5) {
+    		    alert('You lose');
+    		    bg.style.display = "none";
+    		}
+    	}
+  
+	    setInterval(createPoint, 1000);
+
+	    setTimeout(endGame, 7000)
+    </script>
+</body>
+</html>
